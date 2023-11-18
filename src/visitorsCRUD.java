@@ -50,4 +50,15 @@ public class visitorsCRUD {
         }
         return resultVisitor;
     }
+    public void insertVisitor(visitorsModel visitor){
+        String sql = "INSERT INTO visitors (visitor_name, reference) VALUES (?, ?);";
+        try {
+            PreparedStatement prepared = connection.prepareStatement(sql);
+            prepared.setString(1, visitor.getVisitorName());
+            prepared.setString(2, visitor.getVisitorReference());
+            prepared.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
