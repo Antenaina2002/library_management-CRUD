@@ -61,4 +61,14 @@ public class visitorsCRUD {
             throw new RuntimeException(e);
         }
     }
+    public void deleteVisitor(int id){
+        String sql = "DELETE FROM visitors WHERE id = ?;";
+        try {
+            PreparedStatement prepared = connection.prepareStatement(sql);
+            prepared.setInt(1, id);
+            prepared.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
