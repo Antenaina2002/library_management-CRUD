@@ -32,4 +32,22 @@ public class visitorsCRUD {
         }
         return resultList;
     }
+    public visitorsModel selectOneVisitor(int id){
+        String sql = "SELECT * FROM visitors WHERE id = ?;";
+        visitorsModel resultVisitor;
+        try {
+            PreparedStatement prepared = connection.prepareStatement(sql);
+            prepared.setInt(1, id);
+            ResultSet result = prepared.executeQuery();
+            result.next();
+            resultVisitor = new visitorsModel(
+                    result.getInt("id"),
+                    result.getString("visitor_name"),
+                    result.getString("reference")
+            );
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return resultVisitor;
+    }
 }
