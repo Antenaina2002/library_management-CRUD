@@ -36,4 +36,26 @@ public class booksCRUD {
         }
         return resultList;
     }
+    public booksModel selectOneBook(int id) {
+        String sql = "SELECT * FROM books WHERE id = ?;";
+        booksModel resultBook;
+        try {
+            PreparedStatement prepared = connection.prepareStatement(sql);
+            prepared.setInt(1, id);
+            ResultSet result = prepared.executeQuery();
+            result.next();
+            resultBook = new booksModel(
+                    result.getInt("id"),
+                    result.getString("book_name"),
+                    result.getInt("page_numbers"),
+                    result.getString("topic"),
+                    result.getDate("release_date"),
+                    result.getBoolean("is_available"),
+                    result.getString("author")
+            );
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return resultBook;
+    }
 }
