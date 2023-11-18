@@ -73,4 +73,20 @@ public class booksCRUD {
             throw new RuntimeException(e);
         }
     }
+    public void updateBook(booksModel book) {
+        String sql = "UPDATE books SET book_name = ?, page_numbers = ?, topic = ?, release_date = ?, is_available = ?, author = ? WHERE id = ?;";
+        try {
+            PreparedStatement prepared = connection.prepareStatement(sql);
+            prepared.setString(1, book.getBookName());
+            prepared.setInt(2, book.getPageNumbers());
+            prepared.setString(3, book.getTopic());
+            prepared.setDate(4, (Date) book.getReleaseDate());
+            prepared.setBoolean(5, book.isAvailable());
+            prepared.setString(6, book.getAuthor());
+            prepared.setInt(7, book.getId());
+            prepared.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
