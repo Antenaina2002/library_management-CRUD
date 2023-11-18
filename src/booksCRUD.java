@@ -58,4 +58,19 @@ public class booksCRUD {
         }
         return resultBook;
     }
+    public void insertBook(booksModel book) {
+        String sql = "INSERT INTO books (book_name, page_numbers, topic, release_date, is_available, author) VALUES (?, ?, ?, ?, ?, ?);";
+        try {
+            PreparedStatement prepared = connection.prepareStatement(sql);
+            prepared.setString(1, book.getBookName());
+            prepared.setInt(2, book.getPageNumbers());
+            prepared.setString(3, book.getTopic());
+            prepared.setDate(4, (Date) book.getReleaseDate());
+            prepared.setBoolean(5, book.isAvailable());
+            prepared.setString(6, book.getAuthor());
+            prepared.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
