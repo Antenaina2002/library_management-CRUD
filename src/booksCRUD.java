@@ -89,4 +89,14 @@ public class booksCRUD {
             throw new RuntimeException(e);
         }
     }
+    public void deleteBook(int id) {
+        String sql = "DELETE FROM books WHERE id = ?;";
+        try {
+            PreparedStatement prepared = connection.prepareStatement(sql);
+            prepared.setInt(1, id);
+            prepared.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
