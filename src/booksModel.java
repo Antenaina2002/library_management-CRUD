@@ -1,9 +1,11 @@
+import java.util.Date;
+
 public class booksModel {
     private int id;
     private String bookName;
     private int pageNumbers;
     private String topic;
-    private String releaseDate;
+    private Date releaseDate;
     private boolean isAvailable;
     private String author;
 
@@ -23,7 +25,7 @@ public class booksModel {
         return topic;
     }
 
-    public String getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
@@ -35,7 +37,7 @@ public class booksModel {
         return author;
     }
 
-    public booksModel(int id, String bookName, int pageNumbers, String topic, String releaseDate, boolean isAvailable, String author) {
+    public booksModel(int id, String bookName, int pageNumbers, String topic, Date releaseDate, boolean isAvailable, String author) {
         this.id = id;
         this.bookName = bookName;
         this.pageNumbers = pageNumbers;
