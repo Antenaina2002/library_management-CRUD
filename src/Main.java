@@ -6,6 +6,9 @@ public class Main {
     public static void main(String[] args) {
         authorsCRUD authorsCrud = new authorsCRUD();
         testAuthorsCrud(authorsCrud);
+
+        booksCRUD booksCrud = new booksCRUD();
+        testBooksCrud(booksCrud);
     }
 
     private static void testAuthorsCrud(authorsCRUD authorsCrud) {
@@ -25,5 +28,17 @@ public class Main {
         authorsModel authorToDelete = savedAuthors.get(0);
         authorsModel deletedAuthor = authorsCrud.delete(authorToDelete);
         System.out.println("Deleted author: " + deletedAuthor);
+    }
+
+    private static void testBooksCrud(booksCRUD booksCrud) {
+        System.out.println("findAll books: " + booksCrud.findAll());
+
+        booksModel bookToSave = new booksModel(0, "John Doe", "Sample Book", 200, "Sample Topic", null, true);
+        booksModel savedBook = booksCrud.save(bookToSave);
+        System.out.println("Saved book: " + savedBook);
+
+        booksModel bookToDelete = savedBook;
+        booksModel deletedBook = booksCrud.delete(bookToDelete);
+        System.out.println("Deleted book: " + deletedBook);
     }
 }
