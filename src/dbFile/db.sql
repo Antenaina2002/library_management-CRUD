@@ -4,6 +4,13 @@ CREATE DATABASE library_management;
 
 \c library_management
 
+CREATE TABLE author (
+    id VARCHAR(255) PRIMARY KEY,
+    authorName VARCHAR(255),
+    sex VARCHAR(255) REFERENCES Sex(id)
+);
+
+
 CREATE TABLE books (
     id SERIAL PRIMARY KEY,
     book_name VARCHAR(255) NOT NULL,
