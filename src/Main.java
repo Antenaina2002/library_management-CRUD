@@ -9,6 +9,9 @@ public class Main {
 
         booksCRUD booksCrud = new booksCRUD();
         testBooksCrud(booksCrud);
+
+        visitorsCRUD visitorsCrud = new visitorsCRUD();
+        testVisitorsCrud(visitorsCrud);
     }
 
     private static void testAuthorsCrud(authorsCRUD authorsCrud) {
@@ -40,5 +43,24 @@ public class Main {
         booksModel bookToDelete = savedBook;
         booksModel deletedBook = booksCrud.delete(bookToDelete);
         System.out.println("Deleted book: " + deletedBook);
+    }
+
+    private static void testVisitorsCrud(visitorsCRUD visitorsCrud) {
+        System.out.println("findAll visitors: " + visitorsCrud.findAll());
+
+        visitorsModel visitorToSave = new visitorsModel(0, "Visitor1", "Reference1");
+        visitorsModel savedVisitor = visitorsCrud.save(visitorToSave);
+        System.out.println("Saved visitor: " + savedVisitor);
+
+        List<visitorsModel> visitorsToSave = Arrays.asList(
+                new visitorsModel(0, "Visitor2", "Reference2"),
+                new visitorsModel(0, "Visitor3", "Reference3")
+        );
+        List<visitorsModel> savedVisitors = visitorsCrud.saveAll(visitorsToSave);
+        System.out.println("Saved visitors: " + savedVisitors);
+
+        visitorsModel visitorToDelete = savedVisitors.get(0);
+        visitorsModel deletedVisitor = visitorsCrud.delete(visitorToDelete);
+        System.out.println("Deleted visitor: " + deletedVisitor);
     }
 }
