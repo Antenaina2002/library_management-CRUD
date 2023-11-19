@@ -56,6 +56,14 @@ public class booksCRUD implements crudOperations<booksModel> {
             prepared.setDate(5, (Date) toSave.getReleaseDate());
             prepared.setBoolean(6, toSave.isAvailable());
             prepared.executeUpdate();
+
+            ResultSet generatedKeys = prepared.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                toSave.id = generatedKeys.getInt(1);
+            } else {
+                throw new SQLException("La sauvegarde a échoué, aucun ID généré.");
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

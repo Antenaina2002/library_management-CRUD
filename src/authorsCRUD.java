@@ -47,7 +47,6 @@ public class authorsCRUD implements crudOperations<authorsModel> {
             ResultSet generatedKeys = prepared.getGeneratedKeys();
             int i = 0;
             while (generatedKeys.next()) {
-                // Mise à jour de l'ID directement dans l'objet sans utiliser setId
                 toSave.get(i).id = generatedKeys.getInt(1);
                 i++;
             }
@@ -68,7 +67,6 @@ public class authorsCRUD implements crudOperations<authorsModel> {
 
             ResultSet generatedKeys = prepared.getGeneratedKeys();
             if (generatedKeys.next()) {
-                // Mise à jour de l'ID directement dans l'objet sans utiliser setId
                 toSave.id = generatedKeys.getInt(1);
             } else {
                 throw new SQLException("La sauvegarde a échoué, aucun ID généré.");

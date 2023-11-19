@@ -1,5 +1,5 @@
 public class visitorsModel {
-    private int id;
+    int id;
     private String visitorName;
     private String visitorReference;
 
