@@ -1,7 +1,5 @@
-import java.util.Date;
-
 public class authorsModel {
-    private int id;
+    int id;
     private String authorName;
     private char authorSex;
 
