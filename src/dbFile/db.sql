@@ -4,27 +4,28 @@ CREATE DATABASE library_management;
 
 \c library_management
 
-CREATE TABLE author (
+CREATE TABLE authors (
     id VARCHAR(255) PRIMARY KEY,
     authorName VARCHAR(255),
-    sex VARCHAR(255) REFERENCES Sex(id)
+    sex CHAR(1)
 );
 
 
 CREATE TABLE books (
     id SERIAL PRIMARY KEY,
+    author_name VARCHAR(255),
     book_name VARCHAR(255) NOT NULL,
     page_numbers INTEGER,
-    topic VARCHAR(255) CHECK (topic IN ('ROMANCE', 'COMEDY', 'OTHER')),
+    topic VARCHAR(255),
     release_date DATE,
     is_available BOOLEAN DEFAULT TRUE,
-    author VARCHAR(255) NOT NULL
+    FOREIGN KEY (author_name) REFERENCES authors(authorName)
 );
 
 CREATE TABLE visitors (
     id SERIAL PRIMARY KEY,
     visitor_name VARCHAR(255) NOT NULL,
-    reference VARCHAR(255) UNIQUE NOT NULL CHECK (reference IN ('vst12345'))
+    reference VARCHAR(255) DEFAULT 'vst12345' UNIQUE NOT NULL
 );
 
 CREATE TABLE loan_history (
@@ -32,7 +33,7 @@ CREATE TABLE loan_history (
     book_id INTEGER REFERENCES books(id),
     visitor_id INTEGER REFERENCES visitors(id),
     visitor_name VARCHAR(255),
-    visitor_reference VARCHAR(255) UNIQUE NOT NULL CHECK (visitor_reference IN('vst12345'))
+    visitor_reference VARCHAR(255) DEFAULT 'vst12345' UNIQUE NOT NULL,
     borrowed_date DATE,
     returned_date DATE,
     is_available BOOLEAN,

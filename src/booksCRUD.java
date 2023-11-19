@@ -23,12 +23,12 @@ public class booksCRUD {
             while (result.next()) {
                 resultList.add(new booksModel(
                         result.getInt("id"),
+                        result.getString("author_name"),
                         result.getString("book_name"),
                         result.getInt("page_numbers"),
                         result.getString("topic"),
                         result.getDate("release_date"),
-                        result.getBoolean("is_available"),
-                        result.getString("author")
+                        result.getBoolean("is_available")
                 ));
             }
         } catch (SQLException e) {
@@ -46,12 +46,12 @@ public class booksCRUD {
             result.next();
             resultBook = new booksModel(
                     result.getInt("id"),
+                    result.getString("author_name"),
                     result.getString("book_name"),
                     result.getInt("page_numbers"),
                     result.getString("topic"),
                     result.getDate("release_date"),
-                    result.getBoolean("is_available"),
-                    result.getString("author")
+                    result.getBoolean("is_available")
             );
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -59,22 +59,22 @@ public class booksCRUD {
         return resultBook;
     }
     public void insertBook(booksModel book) {
-        String sql = "INSERT INTO books (book_name, page_numbers, topic, release_date, is_available, author) VALUES (?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO books (author_name, book_name, page_numbers, topic, release_date, is_available) VALUES (?, ?, ?, ?, ?, ?);";
         try {
             PreparedStatement prepared = connection.prepareStatement(sql);
-            prepared.setString(1, book.getBookName());
-            prepared.setInt(2, book.getPageNumbers());
-            prepared.setString(3, book.getTopic());
-            prepared.setDate(4, (Date) book.getReleaseDate());
-            prepared.setBoolean(5, book.isAvailable());
-            prepared.setString(6, book.getAuthor());
+            prepared.setString(1, book.getAuthorName());
+            prepared.setString(2, book.getBookName());
+            prepared.setInt(3, book.getPageNumbers());
+            prepared.setString(4, book.getTopic());
+            prepared.setDate(5, (Date) book.getReleaseDate());
+            prepared.setBoolean(6, book.isAvailable());
             prepared.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
     public void updateBook(booksModel book) {
-        String sql = "UPDATE books SET book_name = ?, page_numbers = ?, topic = ?, release_date = ?, is_available = ?, author = ? WHERE id = ?;";
+        String sql = "UPDATE books SET book_name = ?, page_numbers = ?, topic = ?, release_date = ?, is_available = ?, WHERE id = ?;";
         try {
             PreparedStatement prepared = connection.prepareStatement(sql);
             prepared.setString(1, book.getBookName());
@@ -82,7 +82,6 @@ public class booksCRUD {
             prepared.setString(3, book.getTopic());
             prepared.setDate(4, (Date) book.getReleaseDate());
             prepared.setBoolean(5, book.isAvailable());
-            prepared.setString(6, book.getAuthor());
             prepared.setInt(7, book.getId());
             prepared.executeUpdate();
         } catch (SQLException e) {

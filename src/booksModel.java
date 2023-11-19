@@ -2,15 +2,19 @@ import java.util.Date;
 
 public class booksModel {
     private int id;
+    private String authorName;
     private String bookName;
     private int pageNumbers;
     private String topic;
     private Date releaseDate;
     private boolean isAvailable;
-    private String author;
 
     public int getId() {
         return id;
+    }
+
+    public String getAuthorName() {
+        return authorName;
     }
 
     public String getBookName() {
@@ -33,18 +37,14 @@ public class booksModel {
         return isAvailable;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public booksModel(int id, String bookName, int pageNumbers, String topic, Date releaseDate, boolean isAvailable, String author) {
+    public booksModel(int id, String authorName, String bookName, int pageNumbers, String topic, Date releaseDate, boolean isAvailable) {
         this.id = id;
+        this.authorName = authorName;
         this.bookName = bookName;
         this.pageNumbers = pageNumbers;
         this.topic = topic;
         this.releaseDate = releaseDate;
         this.isAvailable = isAvailable;
-        this.author = author;
     }
 }
 
